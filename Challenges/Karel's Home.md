@@ -1,23 +1,33 @@
-<img align="left" src="Images/2024_Karel.png" height="520">
+<img align="left" src="Images/Karel's_Home.png" height="700">
 
 ```python
 from karel.stanfordkarel import *
 
-"""
-When you finish writing this file, Karel should be able to 
-place 20 beepers, then 24 beepers, and end facing East to 
-the right of the 24 beepers.
-"""
+# The function should make Karel 
+# move to the beeper, pick it up, and
+# return home.
 
 def main():
-    #Karel puts beeper down 20 times and moves forward
-    for i in range (20) :
-        put_beeper()
+    for i in range (2):    #moves 2 steps
+        move()
+    for i in range (3):    #turn right
+        turn_left()
+
+    move()                
+    turn_left()            #cut corner
     move()
-    #Karel puts beeper down 24 times and moves forward
-    for i in range (24) :
-        put_beeper()
+
+    pick_beeper()          #pick beeper and
+    for i in range (2):    #move back in position
+        turn_left()
+    for i in range (3):
+        move()
+    for i in range (3):
+        turn_left()
+
     move()
+    for i in range (3):
+        turn_left()
 
 if __name__ == '__main__':
     main()

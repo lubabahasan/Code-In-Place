@@ -1,23 +1,12 @@
-<img align="left" src="Images/2024_Karel.png" height="520">
+<img align="left" src="Images/Hello_Name.png" height="550">
 
-```python
-from karel.stanfordkarel import *
+```pythondef main():
 
-"""
-When you finish writing this file, Karel should be able to 
-place 20 beepers, then 24 beepers, and end facing East to 
-the right of the 24 beepers.
-"""
+    #taking name as input
+    name = input("What is your name? ")
 
-def main():
-    #Karel puts beeper down 20 times and moves forward
-    for i in range (20) :
-        put_beeper()
-    move()
-    #Karel puts beeper down 24 times and moves forward
-    for i in range (24) :
-        put_beeper()
-    move()
+    #printing name
+    print("Hello "+name)
 
 if __name__ == '__main__':
     main()

@@ -1,23 +1,20 @@
-<img align="left" src="Images/2024_Karel.png" height="520">
+<img align="left" src="Images/N-Sided_Dice.png" height="550">
 
 ```python
-from karel.stanfordkarel import *
-
-"""
-When you finish writing this file, Karel should be able to 
-place 20 beepers, then 24 beepers, and end facing East to 
-the right of the 24 beepers.
-"""
+import random
 
 def main():
-    #Karel puts beeper down 20 times and moves forward
-    for i in range (20) :
-        put_beeper()
-    move()
-    #Karel puts beeper down 24 times and moves forward
-    for i in range (24) :
-        put_beeper()
-    move()
+    #taking input of no. of sides
+    sides = input("How many sides does your dice have? ")
+
+    #converting to integer
+    sides = int(sides)
+
+    #generating a random number based on no. of sides
+    roll = random.randint(1, sides)
+
+    #printing a random number based on no. of sides
+    print("Your roll is " + str(roll))
 
 if __name__ == '__main__':
     main()

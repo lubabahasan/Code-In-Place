@@ -1,24 +1,26 @@
-<img align="left" src="Images/2024_Karel.png" height="520">
+<img align="left" src="Images/Liftoff.png" height="500">
 
 ```python
-from karel.stanfordkarel import *
-
 """
-When you finish writing this file, Karel should be able to 
-place 20 beepers, then 24 beepers, and end facing East to 
-the right of the 24 beepers.
+Countdown from 10 to 1 and then print Liftoff!
 """
 
 def main():
-    #Karel puts beeper down 20 times and moves forward
-    for i in range (20) :
-        put_beeper()
-    move()
-    #Karel puts beeper down 24 times and moves forward
-    for i in range (24) :
-        put_beeper()
-    move()
 
+    #variable to keep count
+    count = 10
+
+    #using a for loop to count
+    for i in range (10):
+        print(count)
+        count = count-1
+
+    #once out of the loop :
+    print("Liftoff!")
+
+
+# This provided line is required at the end of
+# Python file to call the main() function.
 if __name__ == '__main__':
     main()
 ```

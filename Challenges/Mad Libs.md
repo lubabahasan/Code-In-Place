@@ -1,23 +1,20 @@
-<img align="left" src="Images/2024_Karel.png" height="520">
+<img src="Images/Mad_Libs.png" height="400">
 
 ```python
-from karel.stanfordkarel import *
+"""
+Uses constants to tell a mad libs story.
+"""
 
-"""
-When you finish writing this file, Karel should be able to 
-place 20 beepers, then 24 beepers, and end facing East to 
-the right of the 24 beepers.
-"""
+# Fun fact: 6174 is known as Kaprekar's constant,
+# and it's a pretty mysterious number :)
+
+WIZARD = 'Karel'
+NUMBER_OF_FRUIT = 6174
+FRUIT = 'mangoes'
 
 def main():
-    #Karel puts beeper down 20 times and moves forward
-    for i in range (20) :
-        put_beeper()
-    move()
-    #Karel puts beeper down 24 times and moves forward
-    for i in range (24) :
-        put_beeper()
-    move()
+    print("There once was a wizard by the name of " + WIZARD + " who loved to eat " + FRUIT + ".")
+    print(WIZARD + " always kept a stash of " + str(NUMBER_OF_FRUIT) + " " + FRUIT + " in their house...")
 
 if __name__ == '__main__':
     main()

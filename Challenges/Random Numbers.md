@@ -1,23 +1,21 @@
-<img align="left" src="Images/2024_Karel.png" height="520">
+<img align="left" src="Images/Random_Numbers.png" height="700">
 
 ```python
-from karel.stanfordkarel import *
+import random
 
-"""
-When you finish writing this file, Karel should be able to 
-place 20 beepers, then 24 beepers, and end facing East to 
-the right of the 24 beepers.
-"""
+N_NUMBERS = 10
+MIN_VALUE = 1
+MAX_VALUE = 100
 
 def main():
-    #Karel puts beeper down 20 times and moves forward
-    for i in range (20) :
-        put_beeper()
-    move()
-    #Karel puts beeper down 24 times and moves forward
-    for i in range (24) :
-        put_beeper()
-    move()
+    #repeating using a for loop
+    for i in range (10) :
+
+        #generating a random number between 1 to 100
+        num = random.randint(1, 100)
+
+        #printing the number
+        print(str(num))
 
 if __name__ == '__main__':
     main()
