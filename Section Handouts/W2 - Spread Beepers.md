@@ -1,3 +1,6 @@
+<img align="left" src="Images/Spread_Beepers_1.png" height="450"><img src="Images/Spread_Beepers_2.png" height="450">
+
+```python
 from karel.stanfordkarel import *
 
 """
@@ -57,7 +60,6 @@ def main():
     move()
     spread()
     
-
-# There is no need to edit code beyond this point
 if __name__ == '__main__':
     main()
+```

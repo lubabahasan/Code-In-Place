@@ -1,3 +1,6 @@
+<img align="left" src="Images/Mars_Weight.png" height="550">
+
+```python
 """
 Prompts the user for a weight on Earth
 and prints the equivalent weight on Mars.
@@ -18,3 +21,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+```

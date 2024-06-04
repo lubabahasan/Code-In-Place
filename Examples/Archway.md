@@ -1,3 +1,6 @@
+<img align="left" src="Images/Archway.png" height="700">
+
+```python
 from karel.stanfordkarel import *
 
 def turn_right():
@@ -41,9 +44,6 @@ def main():
     move_ahead()
     move_down()
 
-
-
-# There is no need to edit code beyond this point
-
 if __name__ == '__main__':
     main()
+```

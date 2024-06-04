@@ -1,3 +1,6 @@
+<img align="left" src="Images/Planetary_Weights_1.png" height="500"><img src="Images/Planetary_Weights_2.png" height="500">
+
+```python
 """
 Prompts the user for a weight on Earth
 and a planet (in separate inputs). Then 
@@ -45,3 +48,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+```

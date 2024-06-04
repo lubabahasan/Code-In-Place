@@ -1,6 +1,7 @@
-from karel.stanfordkarel import *
+<img align="left" src="Images/Hospital_Karel_1.png" height="500"> <img src="Images/Hospital_Karel_2.png" height="500">
 
-# Here is a place to program your Section problem
+```python
+from karel.stanfordkarel import *
 
 def turn_right():
     for i in range (3):
@@ -55,8 +56,7 @@ def main():
         #Karel continues ahead
         if front_is_clear() :
             move()
-        
-
 
 if __name__ == '__main__':
     main()
+```

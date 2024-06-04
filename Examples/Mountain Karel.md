@@ -1,8 +1,10 @@
+<img align="left" src="Images/Mountain_Karel.png" height="300"> 
+
+```python
+
 from karel.stanfordkarel import *
 
 """
-File: Mountain.py
-----------------------------
 Karel climbs a mountain of any size
 and plants a beeper at the top
 """
@@ -57,6 +59,6 @@ def turn_right():
     for i in range(3):
         turn_left()
 
-
 if __name__ == '__main__':
     main()
+```
