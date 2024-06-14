@@ -9,6 +9,7 @@ import random
     
 CANVAS_WIDTH = 350
 CANVAS_HEIGHT = 460
+OFFSET = 10
 
 SIZE = 80
 DELAY = 0.004
@@ -17,37 +18,65 @@ COUNT = 4
 
 canvas = Canvas(CANVAS_WIDTH, CANVAS_HEIGHT)
 fruit_list = ["apple", "orange", "banana", "badapple", "badbanana"]
+good_fruits = ["apple", "orange", "banana"]
 
 def main():
     #setup start
     size = SIZE
     fruit_count = 20
+    player_score = 0
 
     left_x = CANVAS_WIDTH/2 - size/2 + 5
     left_y = CANVAS_HEIGHT/2 - size/2 - 20
-
-    canvas.create_rectangle( 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT/2, color = '#ADD8E6' )
+    
     #setup end
 
+
     #game start
-    start_menu()
+    start()
 
     fruits_num = canvas.create_text(
         300, 10,
-        text = "20",
+        text = str(fruit_count),
         font = 'Lucida Console',
         #font = 'Consolas'
         font_size = 20,
         color = 'black'
     )
 
+    score_num = canvas.create_text(
+        90, 10,
+        text = str(player_score),
+        font = 'Lucida Console',
+        font_size = 20,
+        color = 'black'
+    )
+
     delay = DELAY
+
     while fruit_count > 0 :
-        send_fruit(canvas, left_x, left_y, size, 0, 0, delay)
+        score = send_fruit(left_x, left_y, size, 0, 0, delay)
+        #baskets(curr_fruit)
         fruit_count -= 1
         fruits_num = update_fruits(fruit_count, fruits_num)
+        
+        player_score += score
+        if player_score<0 :
+            player_score = 0
+        score_num = update_score(player_score, score_num)
+    
+    end_screen(player_score)
 
-def start_menu():
+
+def start():
+    #loader()
+    start_screen()
+    canvas.clear()
+    
+    canvas.create_rectangle( 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT/2, color='#ADD8E6')
+    canvas.create_rectangle( 0, CANVAS_HEIGHT/2+40, CANVAS_WIDTH, CANVAS_HEIGHT, color='#808080')
+    canvas.create_rectangle( 0, CANVAS_HEIGHT/2 - 10, CANVAS_WIDTH, CANVAS_HEIGHT/2+40, color='#4a6fc5')
+    
     ramp = ramp_start(1)
     start_texts()
 
@@ -115,15 +144,23 @@ def start_texts():
         color = 'black'
     )
 
-    update_score(0)
-
-def send_fruit(canvas, left_x, left_y, size, distance, num, delay) :
+def send_fruit(left_x, left_y, size, distance, num, delay) :
     while True :
         fruit = random.choice(fruit_list)
         count = 0
+        temp_score = 0
+
+        fruit_text = baskets(fruit)
+        fruit_label = canvas.create_text(
+            15, 235,
+            text = fruit_text,
+            color = 'white',
+            font_size = 18
+        )
+
         while left_y < CANVAS_HEIGHT :
             ramp = ramp_start(num)
-            
+
             image = canvas.create_image_with_size(
                 left_x,
                 left_y,
@@ -152,21 +189,37 @@ def send_fruit(canvas, left_x, left_y, size, distance, num, delay) :
             canvas.delete(image)
             
             key = canvas.get_last_key_press()
-            if key == "ArrowRight" :
-                move_right(left_x, left_y, size, distance, fruit, num)
-                key = "None"
+            if key == "ArrowRight" and left_y < CANVAS_HEIGHT-150:
+                canvas.get_last_key_press()
+                move_right(left_x, left_y, size, distance, fruit)
+                if fruit_text.endswith(str(fruit)) :
+                    temp_score = 10
+                else :
+                    temp_score = -10
                 break
-            elif key == "ArrowLeft" :
-                move_left(left_x, left_y, size, distance, fruit, num)
-                key = "None"
+            elif key == "ArrowLeft" and left_y < CANVAS_HEIGHT-150 :
+                canvas.get_last_key_press()
+                move_left(left_x, left_y, size, distance, fruit)
+                if fruit_text.startswith(str(fruit)) :
+                    temp_score = 10
+                else :
+                    temp_score = -10
                 break
-            
+            elif fruit.startswith("bad"):
+                temp_score = 10
+            else :
+                temp_score = -10
+
+            canvas.get_last_key_press()
             canvas.delete(ramp)
-            
+
+        canvas.delete(fruit_label)
+          
+        return temp_score
         break
 
-def move_right(left_x, left_y, size, distance, fruit, num) :
-
+def move_right(left_x, left_y, size, distance, fruit) :
+    canvas.get_last_key_press()
     while left_x < CANVAS_WIDTH :
             image = canvas.create_image_with_size(
                 left_x,
@@ -182,10 +235,9 @@ def move_right(left_x, left_y, size, distance, fruit, num) :
             time.sleep(OTHER_DELAY)
             canvas.delete(image)
 
-def move_left(left_x, left_y, size, distance, fruit, num) :
-
+def move_left(left_x, left_y, size, distance, fruit) :
+    canvas.get_last_key_press()
     while left_x + size > 0 :
-            ramp = ramp_start(num)
             image = canvas.create_image_with_size(
                 left_x,
                 left_y,
@@ -198,12 +250,12 @@ def move_left(left_x, left_y, size, distance, fruit, num) :
 
             time.sleep(OTHER_DELAY)
             canvas.delete(image)
-            canvas.delete(ramp)
 
-def update_score(score):
+def update_score(curr_score, score_num):
+    canvas.delete(score_num)
     score_num = canvas.create_text(
         90, 10,
-        text = str(score),
+        text = str(curr_score),
         font = 'Lucida Console',
         font_size = 20,
         color = 'black'
@@ -220,6 +272,67 @@ def update_fruits(fruits_left, prev_fruit):
         color = 'black'
     )
     return new_fruits
+
+def baskets(fruit):
+    left = random.choice(good_fruits)
+    if good_fruits.count(fruit)==0 :  #bad fruit
+        temp = good_fruits.pop(good_fruits.index(left))
+        right = random.choice(good_fruits)
+        good_fruits.append(temp)
+    else :  #good fruit
+        if(left == fruit) :
+            temp = good_fruits.pop(good_fruits.index(left))
+            right = random.choice(good_fruits)
+            good_fruits.append(temp)
+        else :
+            right = fruit
+    
+    space = "                                         "
+
+    if left=="apple":
+        left+="  "
+
+    return left+space+right
+
+def end_screen(player_score):
+    canvas.clear()
+    border = canvas.create_rectangle(
+        0, 0, CANVAS_WIDTH, CANVAS_HEIGHT, color='black'
+    )
+
+    if player_score>0 :
+        canvas.create_image_with_size(
+            0, 0, CANVAS_WIDTH, CANVAS_HEIGHT, "ohno.png"
+        )
+    else :
+        canvas.create_image_with_size(
+            0, 0, CANVAS_WIDTH, CANVAS_HEIGHT, "win.png"
+        )
+
+def start_screen():
+    border = canvas.create_rectangle(
+        0, 0,
+        CANVAS_WIDTH, CANVAS_HEIGHT,
+        'black'
+    )
+
+    back = canvas.create_rectangle(
+        OFFSET, OFFSET, CANVAS_WIDTH-OFFSET, CANVAS_HEIGHT-OFFSET, 'pink'
+    )
+
+
+
+'''
+def loader():
+    canvas.create_image(0, 0, "orange.png")
+    canvas.create_image(0, 0, "banana.png")
+    canvas.create_image(0, 0, "apple.png")
+    canvas.create_image(0, 0, "badbanana.png")
+    canvas.create_image(0, 0, "badapple.png")
+    canvas.create_image(0, 0, "background1.png")
+    canvas.create_image(0, 0, "background2.png")
+    canvas.create_image(0, 0, "background3.png")
+'''
 
 if __name__ == '__main__':
     main()
