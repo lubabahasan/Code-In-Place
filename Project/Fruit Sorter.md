@@ -69,7 +69,17 @@ def main():
 
 
 def start():
-    #loader()
+    loader()
+
+    start = canvas.create_image_with_size(
+        0, 0,
+        CANVAS_WIDTH,
+        CANVAS_HEIGHT,
+        "start.png"
+    )
+
+    time.sleep(6)
+
     start_screen()
     canvas.clear()
     
@@ -301,13 +311,38 @@ def end_screen(player_score):
     )
 
     if player_score>0 :
-        canvas.create_image_with_size(
-            0, 0, CANVAS_WIDTH, CANVAS_HEIGHT, "ohno.png"
+        canvas.create_text(
+            30, 110,
+            text = "CONGRATULATIONS!",
+            font = 'Lucida Console',
+            font_size = 32,
+            color = 'green'
         )
     else :
-        canvas.create_image_with_size(
-            0, 0, CANVAS_WIDTH, CANVAS_HEIGHT, "win.png"
+        canvas.create_text(
+            40, 80,
+            text = "GAME OVER",
+            font = 'Lucida Console',
+            font_size = 50,
+            color = 'red'
         )
+    
+    temp = "YOUR SCORE: "+str(player_score)
+    canvas.create_text(
+        35, 200,
+        text = temp,
+        font = 'Lucida Console',
+        font_size = 30,
+        color = 'white'
+    )
+
+    canvas.create_text(
+        30, 280,
+        text = "Thanks for playing!",
+        font = 'Lucida Console',
+        font_size = 25,
+        color = 'white'
+    )
 
 def start_screen():
     border = canvas.create_rectangle(
@@ -321,18 +356,16 @@ def start_screen():
     )
 
 
-
-'''
 def loader():
-    canvas.create_image(0, 0, "orange.png")
-    canvas.create_image(0, 0, "banana.png")
-    canvas.create_image(0, 0, "apple.png")
-    canvas.create_image(0, 0, "badbanana.png")
-    canvas.create_image(0, 0, "badapple.png")
-    canvas.create_image(0, 0, "background1.png")
-    canvas.create_image(0, 0, "background2.png")
-    canvas.create_image(0, 0, "background3.png")
-'''
+    canvas.create_image(CANVAS_HEIGHT, CANVAS_WIDTH, "orange.png")
+    canvas.create_image(CANVAS_HEIGHT, CANVAS_WIDTH, "banana.png")
+    canvas.create_image(CANVAS_HEIGHT, CANVAS_WIDTH, "apple.png")
+    canvas.create_image(CANVAS_HEIGHT, CANVAS_WIDTH, "badbanana.png")
+    canvas.create_image(CANVAS_HEIGHT, CANVAS_WIDTH, "badapple.png")
+    canvas.create_image(CANVAS_HEIGHT, CANVAS_WIDTH, "background1.png")
+    canvas.create_image(CANVAS_HEIGHT, CANVAS_WIDTH, "background2.png")
+    canvas.create_image(CANVAS_HEIGHT, CANVAS_WIDTH, "background3.png")
+
 
 if __name__ == '__main__':
     main()
