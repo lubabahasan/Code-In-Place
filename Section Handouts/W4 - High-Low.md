@@ -1,6 +1,7 @@
 <img align="left" src="Images/High_Low_1.png" height="550"><img src="Images/High_Low_2.png" height="550"><img src="Images/High_Low_3.png" height="550"><img src="Images/High_Low_4.png" height="550">
 
 ```python
+
 import random
 
 NUM_ROUNDS = 5
@@ -39,14 +40,12 @@ def main():
             print("Aww, that's incorrect. The computer's number was " + str(computer_num))
         print("Your score is now " + str(score) + '\n')
 
-        if score == 5 :
-            print("Wow! You played perfectly!\n")
-        elif score >= round(NUM_ROUNDS/2,0) :
-            print("Good job, you played really well!\n")
-        else :
-            print("Better luck next time!\n")
-
-    print("Thanks for playing!")
+    if score == 5 :
+        print("Wow! You played perfectly!\n")
+    elif score >= round(NUM_ROUNDS/2,0) :
+        print("Good job, you played really well!\n")
+    else :
+        print("Better luck next time!\n")
 
 if __name__ == "__main__":
     main()
