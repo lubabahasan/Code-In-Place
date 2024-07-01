@@ -12,8 +12,8 @@ CANVAS_HEIGHT = 460
 OFFSET = 10
 
 SIZE = 80
-DELAY = 0.004
-OTHER_DELAY = 0.003
+DELAY = 0.0006
+OTHER_DELAY = 0.0005
 COUNT = 4
 
 canvas = Canvas(CANVAS_WIDTH, CANVAS_HEIGHT)
@@ -55,7 +55,7 @@ def main():
     delay = DELAY
 
     while fruit_count > 0 :
-        score = send_fruit(left_x, left_y, size, 0, 0, delay)
+        score = send_fruit(left_x, left_y, size, 0, 1, delay)
         #baskets(curr_fruit)
         fruit_count -= 1
         fruits_num = update_fruits(fruit_count, fruits_num)
@@ -181,7 +181,7 @@ def send_fruit(left_x, left_y, size, distance, num, delay) :
             size += 1
             left_x = CANVAS_WIDTH/2 - size/2 + 5
             left_y += distance
-            distance += 0.1
+            distance += 0.5
             
             if num==1 and count==COUNT :
                 num=2
@@ -240,7 +240,7 @@ def move_right(left_x, left_y, size, distance, fruit) :
             )
 
             left_x = CANVAS_WIDTH/2 - size/2 + distance
-            distance += 10
+            distance += 20
 
             time.sleep(OTHER_DELAY)
             canvas.delete(image)
@@ -256,7 +256,7 @@ def move_left(left_x, left_y, size, distance, fruit) :
                 fruit+".png"
             )
             left_x = CANVAS_WIDTH/2 - size/2 - distance
-            distance += 10
+            distance += 20
 
             time.sleep(OTHER_DELAY)
             canvas.delete(image)
@@ -369,4 +369,5 @@ def loader():
 
 if __name__ == '__main__':
     main()
+    
 ```

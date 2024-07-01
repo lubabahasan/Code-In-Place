@@ -35,12 +35,6 @@ def main():
         food_x = canvas.get_left_x(food)
         food_y = canvas.get_top_y(food)
         
-        if (food_x == x and food_y == y):
-            canvas.moveto(food, 
-                random.randrange(0, CANVAS_WIDTH, SIZE),
-                random.randrange(0, CANVAS_HEIGHT, SIZE)
-            )
-
         print(str(food_x)+" "+str(food_y))
         print(str(x)+" "+str(y))
 
@@ -73,9 +67,16 @@ def main():
             elif direction == 'down':
                 canvas.move(snake, 0, 20)
 
+        if (food_x == x and food_y == y):
+            canvas.moveto(food, 
+                random.randrange(0, CANVAS_WIDTH, SIZE),
+                random.randrange(0, CANVAS_HEIGHT, SIZE)
+            )
+
         time.sleep(DELAY)
         
 if __name__ == '__main__':
     main()
+
 
 ```
