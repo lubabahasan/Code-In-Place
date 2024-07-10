@@ -1,9 +1,3 @@
-<!-- >Hello! This is a fruit sorting game I made using graphics. The pixel art is partly sourced and partly my own work. 
-Use the right and left arrow keys to put the fruits in the correct boxes, all the while avoiding rotten or bug-infested fruits.
-That's all, have fun! :> 
--->
-
-```python
 from graphics import Canvas
 import random
     
@@ -12,8 +6,8 @@ CANVAS_HEIGHT = 460
 OFFSET = 10
 
 SIZE = 80
-DELAY = 0.0006
-OTHER_DELAY = 0.0005
+DELAY = 0.015
+OTHER_DELAY = 0.01
 COUNT = 4
 
 canvas = Canvas(CANVAS_WIDTH, CANVAS_HEIGHT)
@@ -369,5 +363,3 @@ def loader():
 
 if __name__ == '__main__':
     main()
-    
-```
